@@ -22,11 +22,11 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
 
   app.use('/req/', (req, res) => {
     if(req.method === "GET") {
-      res.send(http.get(req.query.addr));
+      http.get(req.query.addr).then(result => res.send(result));
     }
 
     if(req.method === "POST") {
-      res.send(http.get(req.body.addr));
+      http.get(req.body.addr).then(result => res.send(result));
     }
   });
 

@@ -3,5 +3,5 @@ export default m => {
     login: String,
     password: String
   });
-  return m.model('User', UserSchema);
+  return m.model('Users', UserSchema);
 }

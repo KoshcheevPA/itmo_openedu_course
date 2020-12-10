@@ -10,7 +10,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   app.use('/login/', (req, res) => res.send('pkoshcheev'));
 
   app.use('/code/', (req, res) => {
-    let readStream = createReadStream(import.meta.url.substring(8));
+    let readStream = createReadStream(import.meta.url.substring(7));
     readStream.on('open', function () {
       readStream.pipe(res);
     });

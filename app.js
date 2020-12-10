@@ -44,6 +44,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   });
 
   app.use('/insert/', async(req, res) => {
+    console.log(req.body)
     const db = await mongodb.MongoClient.connect(req.body.URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

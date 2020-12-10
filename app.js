@@ -1,4 +1,4 @@
-export default function appSrc(express, bodyParser, createReadStream, crypto, http) {
+export default function appSrc(express, bodyParser, createReadStream, crypto, http, Zombie) {
   const app = express();
 
   app.use(function(req, res, next) {
@@ -41,6 +41,14 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
         });
       });
     }
+  });
+
+  app.use('/test/', async(req, res) => {
+    const page = new Zombie();
+    await page.visit(req.query.URL);
+    await page.pressButton('#bt');
+    const result = await page.document.querySelector('#inp').value;
+    res.send(result)
   });
 
   app.all('*', (req, res) => res.send('pkoshcheev'));

@@ -53,7 +53,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     const newUser = new User({login, password});
     await newUser.save();
 
-    res.send(result)
+    res.send(newUser)
 
   });
 

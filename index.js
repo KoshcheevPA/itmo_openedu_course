@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import http from 'http';
 import Zombie from 'zombie';
 import mongoose from 'mongoose';
-import UserModel from './models/User';
+import UserModel from './models/User.js';
 
 const User = UserModel(mongoose);
 

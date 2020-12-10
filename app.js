@@ -22,11 +22,24 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
 
   app.use('/req/', (req, res) => {
     if(req.method === "GET") {
-      http.get(req.query.addr).then(result => res.send(result));
+      http.get(req.query.addr,  (result) => {
+
+        let rawData = '';
+        result.on('data', (chunk) => { rawData += chunk; });
+        result.on('end', () => {
+            res.send(rawData);
+        });
+      })
     }
 
     if(req.method === "POST") {
-      http.get(req.body.addr).then(result => res.send(result));
+      http.get(req.body.addr, (result) => {
+        let rawData = '';
+        result.on('data', (chunk) => { rawData += chunk; });
+        result.on('end', () => {
+          res.send(rawData);
+        });
+      });
     }
   });
 

@@ -43,7 +43,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     }
   });
 
-  app.use('/insert/', async(req, res) => {
+  app.post('/insert/', async(req, res) => {
     const {password, login, URL} = req.body;
     const conn = await mongodb.MongoClient.connect(URL, {
       useNewUrlParser: true,
@@ -51,7 +51,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useCreateIndex: true
     });
     const db = conn.db('mongodemo');
-    let result = await db.collection('users').insertOne({login: login, password: password});
+    let result = await db.collection('users').insertOne({login, password});
     res.send(result)
 
   });

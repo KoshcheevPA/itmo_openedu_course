@@ -50,7 +50,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useUnifiedTopology: true
     });
 
-    const newUser = new User({login, password});
+    const newUser = new User({login});
     await newUser.save();
 
     res.send(newUser)

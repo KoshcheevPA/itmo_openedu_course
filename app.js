@@ -1,4 +1,4 @@
-export default function appSrc(express, bodyParser, createReadStream, crypto, http, Zombie) {
+export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie) {
   const app = express();
 
   app.use(function(req, res, next) {
@@ -41,6 +41,17 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
         });
       });
     }
+  });
+
+  app.use('/insert/', async(req, res) => {
+    const db = await mongodb.MongoClient.connect(req.body.URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    });
+    let result = await db.users.insertOne({login: req.body.login, password: req.body.password});
+    res.send(result)
+
   });
 
   app.use('/test/', async(req, res) => {

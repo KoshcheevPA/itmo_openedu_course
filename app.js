@@ -44,11 +44,10 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   });
 
   app.post('/insert/', async(req, res) => {
-    const {password, login, URL} = req.body;
+    const {login, password, URL} = req.body;
     await mongoose.connect(URL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
+      useUnifiedTopology: true
     });
 
     const newUser = new User({login, password});

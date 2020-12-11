@@ -52,6 +52,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     });
     const db = conn.db('mongodemo');
     let result = await db.collection('users').insertOne({login, password});
+    db.close()
     res.status(201).json(result);
 
   });

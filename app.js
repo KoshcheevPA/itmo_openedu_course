@@ -50,9 +50,10 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useUnifiedTopology: true,
       useCreateIndex: true
     });
+    const data = {password, login};
     const db = conn.db('mongodemo');
-    let result = await db.collection('users').insertOne({login, password});
-    db.close()
+    let result = await db.collection('users').insertOne(data);
+    db.close();
     res.status(201).json(result);
 
   });

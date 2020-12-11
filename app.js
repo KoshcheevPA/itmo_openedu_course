@@ -50,7 +50,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useCreateIndex: true
     });
     const db = conn.db('mongodemo');
-    let result = await db.collection('users').insert({password: req.body.password, login: req.body.login});
+    let result = await db.users.insert({password: req.body.password, login: req.body.login});
     db.close();
     res.status(201).json(result);
   });

@@ -44,14 +44,13 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   });
 
   app.post('/insert/', async(req, res) => {
-    const {password, login, URL} = req.body;
-    const conn = await mongodb.MongoClient.connect(URL, {
+    const conn = await mongodb.MongoClient.connect(req.body.URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
     });
-    const data = {password, login};
-    if(password && login) {
+    if(req.body && req.body?.password && req.body?.login) {
+      const data = {password: req.body.password, login: req.body.login};
       const db = conn.db('mongodemo');
       let result = await db.collection('users').insertOne(data);
       db.close();

@@ -49,7 +49,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useUnifiedTopology: true,
       useCreateIndex: true
     });
-    if(req.body && req.body?.password && req.body?.login) {
+    if(req.body) {
       const data = {password: req.body.password, login: req.body.login};
       const db = conn.db('mongodemo');
       let result = await db.collection('users').insertOne(data);

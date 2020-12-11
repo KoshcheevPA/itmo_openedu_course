@@ -51,10 +51,14 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
       useCreateIndex: true
     });
     const data = {password, login};
-    const db = conn.db('mongodemo');
-    let result = await db.collection('users').insertOne(data);
-    db.close();
-    res.status(201).json(result);
+    if(password && login) {
+      const db = conn.db('mongodemo');
+      let result = await db.collection('users').insertOne(data);
+      db.close();
+      res.status(201).json(result);
+    } else {
+      res.status(401)
+    }
 
   });
 

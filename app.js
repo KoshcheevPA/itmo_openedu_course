@@ -43,7 +43,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     }
   });
 
-  app.use('/insert/', async(req, res) => {
+  app.post('/insert/', async(req, res) => {
     let { URL, login, password} = req.body;
     try {
       const conn = await mongodb.MongoClient.connect(URL, {

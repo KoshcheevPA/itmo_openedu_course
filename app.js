@@ -6,6 +6,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   app.set('view engine', 'pug');
   app.set('views', path.join(__dirname, 'public'));
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(cors());
   app.options('*', cors());
 
   app.use(function(req, res, next) {

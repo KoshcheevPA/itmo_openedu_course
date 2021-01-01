@@ -53,31 +53,18 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   });
 
 
-  app
-    .get('/wordpress/wp-json/wp/v2/posts/1', (req, res) => res.status(200).json({
-      title: {
-        id: 1,
-        rendered: "pkoshcheev"
-      }
-    }))
+app.get('/wordpress/wp-json/wp/v2/posts/1', (req, res) => res.status(200).json({title: {id: 1, rendered: "pkoshcheev"}}))
     .post('/render/', (req, res) => {
-      const {
-        random2,
-        random3
-      } = req.body;
+      const {random2, random3} = req.body;
 
 
-      let {
-        addr
-      } = req.query;
+      let { addr } = req.query;
 
+      console.log(addr);
 
-      res.render('random', {
-        random2: random2,
-        random3: random3,
-      });
+      res.render('random', {random2: random2, random3: random3,});
     })
-    .get('/wordpress/', (req, res) => res.status(200).render('wordpress'));
+    .get('/wordpress/', (req, res) => res.status(200).render('wordpress'))
 
   app.post('/insert/', async (req, res) => {
     const {login, password, URL} = req.body;
@@ -101,21 +88,6 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     res.status(200).end();
 
   });
-
-    // try {
-    //   const conn = await mongodb.MongoClient.connect(URL, {
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true,
-    //     useCreateIndex: true
-    //   });
-    //   const db = await conn.db('mongodemo');
-    //   let result = await db.users.insert({password: password, login: login});
-    //   db.close();
-    //   res.status(201).json(result);
-    // } catch(e) {
-    //   console.log(e);
-    //   res.status(400).json({ message: 'Ошибка' })
-    // }
 
   app.use('/test/', async(req, res) => {
     const page = new Zombie();

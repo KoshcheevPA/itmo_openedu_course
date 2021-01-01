@@ -1,7 +1,5 @@
 export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors) {
   const app = express();
-  app.use(cors());
-  app.options('*', cors());
 
   app.use(bodyParser.json());
   app.use(express.urlencoded());
@@ -14,6 +12,9 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,OPTIONS,DELETE");
     next();
   });
+
+  app.use(cors());
+  app.options('*', cors());
 
   app.use('/login/', (req, res) => res.send('pkoshcheev'));
 

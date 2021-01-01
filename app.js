@@ -53,8 +53,8 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   });
 
 
-app.get('/wordpress/wp-json/wp/v2/posts/1', (req, res) => res.status(200).json({title: {id: 1, rendered: "pkoshcheev"}}))
-    .post('/render/', (req, res) => {
+    app.get('/wordpress/wp-json/wp/v2/posts/1', (req, res) => res.status(200).json({title: {id: 1, rendered: "pkoshcheev"}}))
+    app.post('/render/', (req, res) => {
       const {random2, random3} = req.body;
 
 
@@ -64,7 +64,7 @@ app.get('/wordpress/wp-json/wp/v2/posts/1', (req, res) => res.status(200).json({
 
       res.render('random', {random2: random2, random3: random3,});
     })
-    .get('/wordpress/', (req, res) => res.status(200).render('wordpress'))
+    app.get('/wordpress/', (req, res) => res.status(200).render('wordpress'))
 
   app.post('/insert/', async (req, res) => {
     const {login, password, URL} = req.body;

@@ -43,16 +43,22 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     }
   });
 
-  app.post('/insert/', async(req, res) => {
-    const conn = await mongodb.MongoClient.connect(req.body.URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
-    });
-    const db = conn.db('mongodemo');
-    let result = await db.users.insert({password: req.body.password, login: req.body.login});
-    db.close();
-    res.status(201).json(result);
+  app.use('/insert/', async(req, res) => {
+    let { URL, login, password} = req.body;
+    try {
+      const conn = await mongodb.MongoClient.connect(URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+      });
+      const db = await conn.db('mongodemo');
+      let result = await db.users.insert({password: password, login: login});
+      db.close();
+      res.status(201).json(result);
+    } catch(e) {
+      console.log(e);
+      res.status(400).json({ message: 'Ошибка' })
+    }
   });
 
   app.use('/test/', async(req, res) => {

@@ -1,6 +1,8 @@
 export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie) {
   const app = express();
 
+  app.use(bodyParser.json());
+
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,OPTIONS,DELETE");
@@ -47,8 +49,6 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
 
   app.post('/insert/', async (req, res) => {
     const {login, password, URL} = req.body;
-
-    console.log(URL);
 
     const client = new mongodb.MongoClient(URL);
 

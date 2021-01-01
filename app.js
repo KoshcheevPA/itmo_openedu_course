@@ -1,5 +1,6 @@
 export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors, path) {
   const app = express();
+  const __dirname = path.resolve();
 
   app.use(bodyParser.json());
   app.use(express.urlencoded());

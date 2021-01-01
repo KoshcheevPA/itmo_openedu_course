@@ -2,6 +2,7 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
   const app = express();
 
   app.use(bodyParser.json());
+  app.use(express.urlencoded());
 
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

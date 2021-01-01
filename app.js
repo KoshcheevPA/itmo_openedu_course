@@ -43,8 +43,13 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     }
   });
 
-  app.post('/insert/', async(req, res) => {
-    const { URL, login, password} = req.body;
+  app.get('/wordpress/', (req, res) => res.status(200).render('wordpress'))
+
+  app.post('/insert/', async (req, res) => {
+    const {login, password, URL} = req.body;
+
+    console.log(URL);
+
     const client = new mongodb.MongoClient(URL);
 
     try {
@@ -52,19 +57,18 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
 
       const database = client.db('readusers');
       const collection = database.collection('users');
-      const doc = {
-        login: login,
-        password: password
-      };
+      const doc = { login: login, password: password };
       const result = await collection.insertOne(doc);
 
-    } catch (error) {
+    } catch(error) {
       console.log(error);
     } finally {
       await client.close();
     }
 
     res.status(200).end();
+
+  });
 
     // try {
     //   const conn = await mongodb.MongoClient.connect(URL, {
@@ -80,7 +84,6 @@ export default function appSrc(express, bodyParser, createReadStream, crypto, ht
     //   console.log(e);
     //   res.status(400).json({ message: 'Ошибка' })
     // }
-  });
 
   app.use('/test/', async(req, res) => {
     const page = new Zombie();

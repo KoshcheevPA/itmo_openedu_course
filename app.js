@@ -1,4 +1,4 @@
-export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors) {
+export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors, path) {
   const app = express();
 
   app.use(bodyParser.json());

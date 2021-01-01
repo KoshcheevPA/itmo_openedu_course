@@ -5,7 +5,8 @@ import crypto from 'crypto';
 import http from 'http';
 import Zombie from 'zombie';
 import mongodb from 'mongodb';
+import cors from 'cors';
 
 import appSrc from './app.js';
-const app = appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie);
+const app = appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors);
 app.listen(process.env.PORT || 3400);

@@ -1,8 +1,9 @@
-export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie) {
+export default function appSrc(express, bodyParser, createReadStream, crypto, http, mongodb, Zombie, cors) {
   const app = express();
 
   app.use(bodyParser.json());
   app.use(express.urlencoded());
+  app.options('*', cors());
 
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
